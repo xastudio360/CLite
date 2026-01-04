@@ -3,7 +3,7 @@
  * @brief Example of CLite IO usage
  */
 
-#include "clite_io.h"
+#include "../include/clite/clite_io.h"
 
 int main(void) {
     // Examples of using print and printl
