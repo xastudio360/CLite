@@ -3,7 +3,7 @@
  * @brief Implementation of CLite input/output functions
  */
 
-#include "clite_io.h"
+#include "../include/clite/clite_io.h"
 #include <string.h>
 
 void print(const char* str) {
