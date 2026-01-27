@@ -1,4 +1,4 @@
-# Makefile for CLite
+# Makefile for CLite v1.0-beta
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c99 -pedantic -I.
 AR = ar
@@ -9,9 +9,10 @@ SRC = clite_io.c
 OBJ = $(SRC:.c=.o)
 LIB = libclite.a
 EXAMPLE = example
+TEST = test_clite_io
 
 # Targets
-.PHONY: all clean example
+.PHONY: all clean example test run-test
 
 all: $(LIB)
 
@@ -29,9 +30,23 @@ example: $(LIB) example.c
 	$(CC) $(CFLAGS) example.c -L. -lclite -o $(EXAMPLE)
 	@echo "Example compiled: ./$(EXAMPLE)"
 
+# Build tests
+test: $(LIB) test_clite_io.c
+	$(CC) $(CFLAGS) test_clite_io.c -L. -lclite -o $(TEST)
+	@echo "Tests compiled: ./$(TEST)"
+
+# Run tests
+run-test: test
+	@echo ""
+	@./$(TEST)
+
+# Full check (build + run tests)
+check: run-test
+	@echo "Check completed"
+
 # Clean
 clean:
-	rm -f $(OBJ) $(LIB) $(EXAMPLE)
+	rm -f $(OBJ) $(LIB) $(EXAMPLE) $(TEST)
 	@echo "Project cleaned"
 
 # Installation (optional)
